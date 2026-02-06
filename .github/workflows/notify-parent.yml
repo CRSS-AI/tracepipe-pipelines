@@ -20,4 +20,4 @@ jobs:
           gh api repos/CRSS-AI/tracepipe/dispatches \
             -X POST \
             -f event_type=submodule-update \
-            -f client_payload='{"source": "${{ github.repository }}"}'
+            -F client_payload='{"source": "${{ github.repository }}"}'
