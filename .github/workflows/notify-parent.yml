@@ -17,7 +17,5 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
-          gh api repos/CRSS-AI/tracepipe/dispatches \
-            -X POST \
-            -f event_type=submodule-update \
-            -F client_payload='{"source": "${{ github.repository }}"}'
+          echo '{"event_type": "submodule-update", "client_payload": {"source": "${{ github.repository }}"}}' | \
+            gh api repos/CRSS-AI/tracepipe/dispatches -X POST --input -
