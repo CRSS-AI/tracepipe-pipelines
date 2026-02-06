@@ -1,0 +1,3 @@
+[submodule "tracepipe-docs"]
+	path = tracepipe-docs
+	url = https://github.com/CRSS-AI/tracepipe-docs.git
