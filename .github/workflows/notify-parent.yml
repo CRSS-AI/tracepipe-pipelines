@@ -1,0 +1,23 @@
+# Notify Parent Workflow
+#
+# When this repo pushes to main, notify the parent tracepipe repo
+# to update its submodule reference.
+
+name: Notify Parent
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger parent submodule update
+        env:
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          gh api repos/CRSS-AI/tracepipe/dispatches \
+            -X POST \
+            -f event_type=submodule-update \
+            -f client_payload='{"source": "${{ github.repository }}"}'
