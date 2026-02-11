@@ -2,6 +2,9 @@
 #
 # When this repo pushes to main, notify the parent tracepipe repo
 # to update its submodule reference.
+#
+# Skips notification if the commit only updates the docs submodule,
+# to prevent circular cascades from tracepipe-docs updates.
 
 name: Notify Parent
 
@@ -13,7 +16,23 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check if docs-only change
+        id: check-docs
+        run: |
+          FILES=$(git diff --name-only HEAD^ HEAD)
+          if [ "$FILES" = "tracepipe-docs" ]; then
+            echo "docs_only=true" >> $GITHUB_OUTPUT
+          else
+            echo "docs_only=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Trigger parent submodule update
+        if: steps.check-docs.outputs.docs_only == 'false'
         env:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
