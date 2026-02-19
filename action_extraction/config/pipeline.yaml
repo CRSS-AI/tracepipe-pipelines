@@ -1,0 +1,48 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+
+display_name: Action Extraction Pipeline
+description: A pipeline extracting, transforming, classifying and parameterizing activity traces.
+
+inputs:
+  pipeline_input_data:
+    type: uri_folder
+    description: Input data directory
+
+outputs: 
+  pipeline_final_output:
+    type: uri_folder
+    description: Final output directory
+
+jobs:
+  extraction:
+    type: command
+    component: extraction.yaml
+    inputs:
+      input: ${{parent.inputs.pipeline_input_data}}
+    outputs:
+      output:
+
+  integration:
+    type: command
+    component: integration.yaml
+    inputs:
+      input: ${{parent.jobs.extraction.outputs.output}}
+    outputs:
+      output:
+
+  window_classification:
+    type: command
+    component: window_classification.yaml
+    inputs:
+      input: ${{parent.jobs.integration.outputs.output}}
+    outputs:
+      output: ${{parent.outputs.pipeline_final_output}}
+
+  parameter_extraction:
+    type: command
+    component: parameter_extraction.yaml
+    inputs:
+      input: ${{parent.jobs.window_classification.outputs.output}}
+    outputs:
+      output: ${{parent.outputs.pipeline_final_output}}

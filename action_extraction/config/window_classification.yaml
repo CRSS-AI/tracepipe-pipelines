@@ -1,0 +1,16 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: window_classification
+version: 1
+display_name: Window Classification
+type: command
+code: ../action_extraction
+command: >-
+  python window_classification.py 
+  --input ${{inputs.input}} 
+  --output ${{outputs.output}}
+inputs:
+  input:
+    type: uri_folder
+outputs:
+  output:
+    type: uri_folder

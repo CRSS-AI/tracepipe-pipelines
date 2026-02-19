@@ -1,0 +1,13 @@
+{
+  "suite": "gmail",
+  "tab": 1,
+  "url": "https://mail.google.com/mail/u/0/#inbox",
+  "timestamp": "2026-01-06T20:30:01.844649+00:00",
+  "action": "click",
+  "image_format": "png",
+  "viewport": {
+    "width": 1920,
+    "height": 991
+  },
+  "filename": "screenshot-uuid.png"
+}

@@ -1,0 +1,25 @@
+[project]
+name = "action_extraction"
+version = "0.1.0"
+description = "Trace Extraction and Processing Pipeline Step"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastparquet>=2025.12.0",
+    "pandas>=2.0.0",
+    "pyarrow>=14.0.0",
+    "pyyaml>=6.0",
+    "pandera>=0.18.0",
+    "python-dotenv>=1.0.0",
+    "requests>=2.32.5",
+    "openai>=1.0.0",
+    "google-genai>=0.1.0",
+    "google-auth>=2.0.0",
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["action_extraction"]

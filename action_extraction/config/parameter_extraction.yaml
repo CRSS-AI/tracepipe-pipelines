@@ -1,0 +1,16 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: parameter_extraction
+version: 1
+display_name: Parameter Extraction
+type: command
+code: ../action_extraction
+command: >-
+  python parameter_extraction.py 
+  --input ${{inputs.input}} 
+  --output ${{outputs.output}}
+inputs:
+  input:
+    type: uri_folder
+outputs:
+  output:
+    type: uri_folder

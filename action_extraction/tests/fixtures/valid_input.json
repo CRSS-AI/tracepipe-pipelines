@@ -1,0 +1,16 @@
+{
+  "suite": "gmail",
+  "tab": 1,
+  "url": "https://mail.google.com/mail/u/0/#inbox",
+  "timestamp": "2026-01-06T20:30:01.337745+00:00",
+  "action": "scroll",
+  "selector": {
+    "tag": "div",
+    "id": "test-id",
+    "class": "test-class"
+  },
+  "additional_info": {
+    "scroll_x": 0,
+    "scroll_y": 100
+  }
+}
